@@ -14,6 +14,53 @@ This task required simple knowledege of the following topics:
 
 The task consists of a simple web-app that we will need to containerize and deliver through nginx.
 
+## About the WebApp
+
+The `webapp` directory contains a simple web API based on NodeJS (version 14.17.3) and a static HTML file (used for the frontend).
+
+You can run the backend api simply by running the following commands:
+
+```bash
+cd webapp
+npm start
+```
+
+Which will result in the following output:
+
+```bash
+> node index.js
+
+Listening on port 3000...
+```
+
+Now you can open up your browser at: `http://localhost:3000/test` and see the following response:
+
+```json
+{ "status": "ok" }
+```
+
+This simple project comes with tests that can run easily:
+
+```bash
+cd webapp
+npm test
+```
+
+Which will result in the following output:
+
+```bash
+> mocha
+
+Warning: Cannot find any files matching pattern "test"
+
+
+  api
+    ✔ should return status ok
+
+
+  1 passing (2ms)
+```
+
 ## Containerize and reverse proxy
 
 For this part we will containerize our webapp, and deliver it's static frontend (`webapp/html`) through reverse proxy, based on nginx.
@@ -24,6 +71,9 @@ For this part we will containerize our webapp, and deliver it's static frontend 
 4. Nginx should deliver the `webapp/html` directory as static content to the parent route. This should result (if running locally), that `http://localhost/index.html` will deliver the `webapp/html/index.html` file. And `http://localhost/api/test` will deliver the API result of the get request `/test`.
 
 If you did everything correctly, you should be able to access the nginx reverse proxy (on your local computer, using the docker-compose you just wrote), click on the `Test the API` and receive a log every-time it is clicked.
+
+![alt text](assets/webapp_example.jpg
+"Webapp running example")
 
 ## Build the CI\CD process
 
